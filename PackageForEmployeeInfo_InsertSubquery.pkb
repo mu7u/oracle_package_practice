@@ -21,7 +21,8 @@ CREATE OR REPLACE PACKAGE BODY EmployeeNamesAndRowCounter AS
 					), country AS (
 					    	SELECT country_id, country_name FROM HR.countries
 					), employee_sorted AS (
-					    	SELECT employee.first_name, employee.last_name, country.country_name, DENSE_RANK() OVER (ORDER BY LENGTH(first_name||last_name) DESC) ranking_by_length FROM employee
+					    	SELECT employee.first_name, employee.last_name, country.country_name, DENSE_RANK() OVER (ORDER BY LENGTH(first_name||last_name) DESC) ranking_by_length 
+						FROM employee
 					    	JOIN department ON employee.department_id = department.department_id
 					    	JOIN location ON department.location_id = location.location_id
 					    	JOIN country ON location.country_id = country.country_id
